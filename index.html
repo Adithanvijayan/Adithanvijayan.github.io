@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125454191-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-125454191-4');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="theme-color" content="#09f" />
+
+
+  <title>Handwriting Converter</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Caveat|Homemade+Apple|Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+
+
+
+</head>
+<body>
+  <main class="form-container">
+    <h1 style="margin-bottom: 7px;">Handwriting Converter</h1>
+    <br/><br/>
+    <section>
+      <form id="generate-image-form">
+
+        <div class="row responsive-row">
+          <div class="col">
+            <label for="handwriting-font">Handwriting Font</label>
+            <select id="handwriting-font">
+              <option style="font-family: 'Homemade Apple'" default value="'Homemade Apple', cursive">Homemade Apple</option>
+              <option style="font-family: 'Caveat', cursive; font-size: 13pt;" value="'Caveat', cursive">Caveat</option>
+            </select>
+          </div>
+          <div style="padding: 30px 20px;">or</div>
+          <div class="col">
+            <label for="font-file">Upload your handwriting font</label>
+            <input type="file" id="font-file" />
+            <br>
+          </div>
+        </div>
+        
+
+        
+        <label for="ink-color">Pen Ink Color</label>
+        <select id="ink-color">
+          <option default value="#000F55">Blue</option>
+          <option value="#333">Black</option>
+        </select><br>
+
+        <div class="row responsive-row">
+
+          <div class="col">
+            <label for="font-size">Font Size</label><br>
+            <input type="number" min="0" value="12" id="font-size" />&nbsp; pt
+            <br><br>
+          </div>
+
+          <div class="col">
+            <label for="top-padding">Vertical position of text</label><br>
+            <input type="number" min="0" value="0" id="top-padding" />&nbsp; px
+            <br><br>
+          </div>
+
+          <div class="col">
+            <label for="word-spacing">Word Spacing</label><br>
+            <input type="number" min="0" value="3" id="word-spacing" />&nbsp; px
+            <br><br>
+          </div>
+
+        </div>
+        <div class="row responsive-row">
+
+          <div class="col">
+            <label for="letter-spacing">Letter Spacing</label><br>
+            <input type="number" value="0" id="letter-spacing" />&nbsp; pt
+            <br><br>
+          </div>
+
+          <div class="col">
+            <label for="paper-margin-toggle">Paper Margin</label>
+            <label class="switch-toggle outer">
+              <input id="paper-margin-toggle" type="checkbox" />
+              <div></div>
+            </label>
+            <br><br>
+          </div>
+
+          <div class="col">
+            <label for="paper-line-toggle">Paper Lines</label>
+            <label role="checkbox" class="switch-toggle outer">
+              <input id="paper-line-toggle" checked type="checkbox" />
+              <div></div>
+            </label>
+            <br /><br />
+          </div>
+
+          <div class="col">
+            <label for="paper-curve-toggle">Paper Curvature</label>
+            <label class="switch-toggle outer">
+              <input id="paper-curve-toggle" type="checkbox" />
+              <div></div>
+            </label>
+          </div>
+          
+        </div>
+        <br/>
+        <button type="button" class="secondary-button" id="draw-diagram-button">Draw Diagram <small>(Beta)</small></button><br/><br/>
+        <button type="submit" class="primary-button" class="generate-image">Generate Image</button> 
+        <button type="button" class="secondary-button" id="generate-pdf">Download as PDF <span style="background-color: #ccc;padding: 5px; color: #000;border-radius: 10px;font-size: 7pt;"><span id="image-count">0</span> Pages</span></button>
+        <br/><br/>
+      </form>
+
+      <!-- Editor -->
+      <div class="row output-grid responsive-row">
+        <div class="col">
+          <div class="page">
+            <div class="paper-margin-top-line" contenteditable="true">
+            </div>
+            <div class="textarea row">
+              <div class="paper-margin-left-line"></div>
+              <div role="textbox" class="paper-content" id="note" contenteditable="true">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rhoncus dui eget tortor feugiat iaculis. Morbi et dolor in felis viverra efficitur. Integer id laoreet arcu. Mauris turpis nibh, scelerisque sed tristique non, hendrerit in erat. Duis interdum nisl risus, ac ultrices ipsum auctor at. Aliquam faucibus iaculis metus sit amet tincidunt. Vestibulum cursus urna vel nunc imperdiet suscipit. Ut eu augue egestas, porta orci lobortis, pharetra orci. Morbi eu tellus quis nisi tempor accumsan nec eu urna.
+    
+                empor, ullamcorper tortor. Mauris quis fermentum augue. Phasellus ac nisl hendrerit, fringilla enim aliquam, placerat odio. Ut tortor nisi, pellentesque sed nisi at, hendrerit imperdiet turpis. Proin interdum porttitor metus at hendrerit. Proin ipsum nisl, lacinia vitae purus ullamcorper, maximus convallis sem. Sed nec lacinia lorem. Duis arcu metus, cursus non odio quis, tincidunt tempor augue. Donec eget vestibulum risus. Nullam blandit quis est vitae feugiat.
+              </div>
+            </div>
+            <div class="overlay"></div>
+          </div>
+        </div>
+        <div class="col output-container">
+          <div id="output" class="output"></div>
+          <div style="text-align: center;padding-top: 20px;">
+            <a class="blue-button download-button disabled hide-mobile">Download Image</a>
+          </div>
+        </div>
+      </div>
+      <br/><a class="blue-button download-button disabled hide-pc">Download Image</a> <br/>
+    </section>
+
+  <!-- Fixed Elements -->
+  <section class="draw-container">
+    <button class="close-button">&times;</button>
+    <div class="row responsive-row">
+      <canvas id="diagram-canvas" style="background-color: #fff;" height="300px" width="600px"></canvas>
+      <div class="col buttons-container">
+        <button class="blue-button" id="add-to-paper-button" style="border: none;">Add to Paper</button>
+        <button class="blue-button" id="draw-download-button" style="border: none;">Download Image</button>
+        <br/><br/>
+        <button id="clear-draw-canvas" class="blue-button" style="border: none;background-color: #f30;">Clear Canvas</button>
+      </div>
+    </div>
+  </section>
+  <!-- GitHub Corner logo -->
+  <img id="warped_image" />
+  <script defer src="./lib/html2canvas.min.js" crossorigin="anonymous"></script>
+  <script defer src="./js/app.mjs" type="module" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/jspdf@^1/dist/jspdf.min.js"></script>
+</body>
+</html>
